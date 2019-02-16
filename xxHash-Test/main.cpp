@@ -42,7 +42,7 @@ int main(int argc, const char * argv[]) {
 	xxh64_oneshot_with_seed();
 	xxh64_update();
 	xxh64_file(0);
-	xxh64_file(0x7fffffff);
+	xxh64_file(0x000000007fffffff);
 	xxh64_canonical();
 
 	return 0;
