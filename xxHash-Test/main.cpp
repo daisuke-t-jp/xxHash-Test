@@ -97,7 +97,7 @@ static void xxh32_oneshot()
 {
 	for(int i = 0; i < sizeof(vector) / sizeof(vector[0]); i++)
 	{
-		std::cout << "XCTAssertEqual(xxxxh32.hash(\"" << vector[i] << "\"), " << "0x" << std::hex << xxh32(vector[i], 0) << ")" << std::endl;
+		std::cout << "XCTAssertEqual(xxHash32.hash(\"" << vector[i] << "\"), " << "0x" << std::hex << xxh32(vector[i], 0) << ")" << std::endl;
 	}
 }
 
@@ -105,9 +105,9 @@ static void xxh32_oneshot_with_seed()
 {
 	for(int i = 0; i < sizeof(vector) / sizeof(vector[0]); i++)
 	{
-		std::cout << "XCTAssertEqual(xxxxh32.hash(\"" << vector[i] << "\", seed:" << 0 << "), " << "0x" << std::hex << xxh32(vector[i], 0) << ")" << std::endl;
-		std::cout << "XCTAssertEqual(xxxxh32.hash(\"" << vector[i] << "\", seed:" << 1 << "), " << "0x" << std::hex << xxh32(vector[i], 1) << ")" << std::endl;
-		std::cout << "XCTAssertEqual(xxxxh32.hash(\"" << vector[i] << "\", seed:" << "0x" << std::hex << 2147483647 << "), " << "0x" << std::hex << xxh32(vector[i], 2147483647) << ")" << std::endl;
+		std::cout << "XCTAssertEqual(xxHash32.hash(\"" << vector[i] << "\", seed:" << 0 << "), " << "0x" << std::hex << xxh32(vector[i], 0) << ")" << std::endl;
+		std::cout << "XCTAssertEqual(xxHash32.hash(\"" << vector[i] << "\", seed:" << 1 << "), " << "0x" << std::hex << xxh32(vector[i], 1) << ")" << std::endl;
+		std::cout << "XCTAssertEqual(xxHash32.hash(\"" << vector[i] << "\", seed:" << "0x" << std::hex << 2147483647 << "), " << "0x" << std::hex << xxh32(vector[i], 2147483647) << ")" << std::endl;
 	}
 }
 
