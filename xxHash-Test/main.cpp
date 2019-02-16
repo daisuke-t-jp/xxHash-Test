@@ -19,6 +19,14 @@ static void xxh32_update();
 static void xxh32_file(unsigned int seed);
 static void xxh32_canonical();
 
+// XXH64
+static XXH64_hash_t xxh64(const char *input, unsigned int seed);
+static void xxh64_oneshot();
+static void xxh64_oneshot_with_seed();
+static void xxh64_update();
+static void xxh64_file(unsigned int seed);
+static void xxh64_canonical();
+
 
 
 int main(int argc, const char * argv[]) {
