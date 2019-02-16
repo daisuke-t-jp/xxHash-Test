@@ -173,6 +173,7 @@ static void xxh64_update()
 
 
 
+// MARK: - File
 static void xxh32_file(unsigned int seed)
 {
 	std::fstream stream;
@@ -198,6 +199,34 @@ static void xxh32_file(unsigned int seed)
 
 	stream.close();
 }
+
+static void xxh64_file(unsigned int seed)
+{
+	std::fstream stream;
+	
+	stream.open("alice29.txt", std::ios::in);
+	if(!stream.is_open())
+	{
+		std::cout <<  "file open error" << std::endl;
+		return;
+	}
+	
+	
+	XXH64_state_t *state = XXH64_createState();
+	XXH64_reset(state, seed);
+	
+	char buf[1024];
+	while(!stream.eof()){
+		stream.read(buf, sizeof(buf));
+		
+		XXH64_update(state, buf, stream.gcount());
+	}
+	std::cout << "alice29.txt" << " " << "0x" << std::hex << XXH64_digest(state) << std::endl;
+	
+	stream.close();
+}
+
+
 
 static void xxh32_canonical()
 {
