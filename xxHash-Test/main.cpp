@@ -132,6 +132,7 @@ static void xxh64_oneshot_with_seed()
 
 
 
+// MARK: - Update
 static void xxh32_update()
 {
 	XXH32_state_t *state = XXH32_createState();
@@ -150,6 +151,27 @@ static void xxh32_update()
 
 	XXH32_freeState(state);
 }
+
+static void xxh64_update()
+{
+	XXH64_state_t *state = XXH64_createState();
+	XXH64_reset(state, 0);
+	
+	for(int i = 0; i < sizeof(vector) / sizeof(vector[0]); i++)
+	{
+		XXH64_update(state, vector_2[i], strlen(vector_2[i]));
+		std::cout << vector[i] << " " << "0x" << std::hex << XXH64_digest(state) << std::endl;
+	}
+	
+	
+	XXH64_reset(state, 0);
+	XXH64_update(state, "123456789ABCDEF12", strlen("123456789ABCDEF12"));
+	std::cout << "123456789ABCDEF12" << " " << "0x" << std::hex << XXH64_digest(state) << std::endl;
+	
+	XXH64_freeState(state);
+}
+
+
 
 static void xxh32_file(unsigned int seed)
 {
