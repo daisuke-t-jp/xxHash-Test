@@ -40,6 +40,11 @@ static XXH32_hash_t xxh32(const char *input, unsigned int seed)
 	return XXH32(input, strlen(input), seed);
 }
 
+static XXH64_hash_t xxh64(const char *input, unsigned int seed)
+{
+	return XXH64(input, strlen(input), seed);
+}
+
 static const char * vector32[] = {
 	"",
 	"1",
