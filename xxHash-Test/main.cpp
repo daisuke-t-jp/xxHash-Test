@@ -38,6 +38,13 @@ int main(int argc, const char * argv[]) {
 	xxh32_file(0x7fffffff);
 	xxh32_canonical();
 
+	xxh64_oneshot();
+	xxh64_oneshot_with_seed();
+	xxh64_update();
+	xxh64_file(0);
+	xxh64_file(0x7fffffff);
+	xxh64_canonical();
+
 	return 0;
 }
 
@@ -255,7 +262,7 @@ static void xxh32_canonical()
 
 static void xxh64_canonical()
 {
-	XXH64_hash_t hash = 0x12345678;
+	XXH64_hash_t hash = 0x12345678ABCDEFBA;
 	XXH64_canonical_t canonical;
 	
 	XXH64_canonicalFromHash(&canonical, hash);
