@@ -228,6 +228,7 @@ static void xxh64_file(unsigned int seed)
 
 
 
+// MARK: - Canonical
 static void xxh32_canonical()
 {
 	XXH32_hash_t hash = 0x12345678;
@@ -241,5 +242,25 @@ static void xxh32_canonical()
 	std::cout << "    0x" << std::hex << +canonical.digest[3] << std::endl;
 
 	hash = XXH32_hashFromCanonical(&canonical);
+	std::cout << "-> 0x" << std::hex << hash << std::endl;
+}
+
+static void xxh64_canonical()
+{
+	XXH64_hash_t hash = 0x12345678;
+	XXH64_canonical_t canonical;
+	
+	XXH64_canonicalFromHash(&canonical, hash);
+	std::cout << "0x" << std::hex << hash << " -> " << std::endl;
+	std::cout << "    0x" << std::hex << +canonical.digest[0] << std::endl;
+	std::cout << "    0x" << std::hex << +canonical.digest[1] << std::endl;
+	std::cout << "    0x" << std::hex << +canonical.digest[2] << std::endl;
+	std::cout << "    0x" << std::hex << +canonical.digest[3] << std::endl;
+	std::cout << "    0x" << std::hex << +canonical.digest[4] << std::endl;
+	std::cout << "    0x" << std::hex << +canonical.digest[5] << std::endl;
+	std::cout << "    0x" << std::hex << +canonical.digest[6] << std::endl;
+	std::cout << "    0x" << std::hex << +canonical.digest[7] << std::endl;
+
+	hash = XXH64_hashFromCanonical(&canonical);
 	std::cout << "-> 0x" << std::hex << hash << std::endl;
 }
