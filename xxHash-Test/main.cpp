@@ -9,7 +9,15 @@
 #include <iostream>
 #include <fstream>
 
+#define XXH_STATIC_LINKING_ONLY   /* *_state_t */
 #include "xxhash.h"
+
+typedef uint8_t  BYTE;
+typedef uint16_t U16;
+typedef uint32_t U32;
+typedef  int32_t S32;
+typedef uint64_t U64;
+
 
 // XXH32
 static XXH32_hash_t xxh32(const char *input, unsigned int seed);
@@ -26,7 +34,6 @@ static void xxh64_oneshot_with_seed();
 static void xxh64_update();
 static void xxh64_file(unsigned int seed);
 static void xxh64_canonical();
-
 
 
 int main(int argc, const char * argv[]) {
@@ -148,6 +155,16 @@ static XXH32_hash_t xxh32(const char *input, unsigned int seed)
 static XXH64_hash_t xxh64(const char *input, unsigned int seed)
 {
 	return XXH64(input, strlen(input), seed);
+}
+
+static XXH64_hash_t xxh3_64(const char *input, unsigned int seed)
+{
+  return XXH3_64bits_withSeed(input, strlen(input), seed);
+}
+
+static XXH128_hash_t xxh3_128(const char *input, unsigned int seed)
+{
+  return XXH3_128bits_withSeed(input, strlen(input), seed);
 }
 
 
@@ -323,3 +340,4 @@ static void xxh64_canonical()
 	hash = XXH64_hashFromCanonical(&canonical);
 	std::cout << "-> 0x" << std::hex << hash << std::endl;
 }
+
