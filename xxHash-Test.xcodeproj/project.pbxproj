@@ -31,6 +31,7 @@
 		02A3013322164CAF00914043 /* xxhash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = xxhash.c; sourceTree = "<group>"; };
 		02A3013422164CAF00914043 /* xxhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xxhash.h; sourceTree = "<group>"; };
 		02A3013822167E5D00914043 /* alice29.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = alice29.txt; sourceTree = "<group>"; };
+		7E47C821227EE827001E0FA6 /* xxh3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xxh3.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				02A3013822167E5D00914043 /* alice29.txt */,
+				7E47C821227EE827001E0FA6 /* xxh3.h */,
 				02A3013422164CAF00914043 /* xxhash.h */,
 				02A3013322164CAF00914043 /* xxhash.c */,
 				02A3012C22164C8400914043 /* main.cpp */,
@@ -135,8 +137,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02A3012D22164C8400914043 /* main.cpp in Sources */,
 				02A3013522164CAF00914043 /* xxhash.c in Sources */,
+				02A3012D22164C8400914043 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
