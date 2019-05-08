@@ -113,8 +113,11 @@ static const char * vector[] = {
 	"123456789ABCDEF123456789ABCDEF123456",
 	"123456789ABCDEF123456789ABCDEF1234567",
 	"123456789ABCDEF123456789ABCDEF12345678",
-	"123456789ABCDEF123456789ABCDEF123456789",
-};
+	"123456789ABCDEF123456789ABCDEF123456789", // 39 chars
+  "123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF", // 90 chars
+  "123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF",  // 105 chars
+  "123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF123456789ABCDEF",  // 135 chars
+ };
 
 static const char * vector_2[] = {
 	"",
@@ -225,7 +228,7 @@ static void xxh3_64_oneshot()
 {
   for(int i = 0; i < sizeof(vector) / sizeof(vector[0]); i++)
   {
-    std::cout << "XCTAssertEqual(xxHash3.digest(\"" << vector[i] << "\"), " << "0x" << std::hex << xxh3_64(vector[i], 0) << ")" << std::endl;
+    std::cout << "XCTAssertEqual(xxHash3.digest64(\"" << vector[i] << "\"), " << "0x" << std::hex << xxh3_64(vector[i], 0) << ")" << std::endl;
   }
 }
 
@@ -233,9 +236,9 @@ static void xxh3_64_oneshot_with_seed()
 {
   for(int i = 0; i < sizeof(vector) / sizeof(vector[0]); i++)
   {
-    std::cout << "XCTAssertEqual(xxHash3.digest(\"" << vector[i] << "\", seed:" << 0 << "), " << "0x" << std::hex << xxh3_64(vector[i], 0) << ")" << std::endl;
-    std::cout << "XCTAssertEqual(xxHash3.digest(\"" << vector[i] << "\", seed:" << 1 << "), " << "0x" << std::hex << xxh3_64(vector[i], 1) << ")" << std::endl;
-    std::cout << "XCTAssertEqual(xxHash3.digest(\"" << vector[i] << "\", seed:" << "0x" << std::hex << 2147483647 << "), " << "0x" << std::hex << xxh32(vector[i], 2147483647) << ")" << std::endl;
+    std::cout << "XCTAssertEqual(xxHash3.digest64(\"" << vector[i] << "\", seed:" << 0 << "), " << "0x" << std::hex << xxh3_64(vector[i], 0) << ")" << std::endl;
+    std::cout << "XCTAssertEqual(xxHash3.digest64(\"" << vector[i] << "\", seed:" << 1 << "), " << "0x" << std::hex << xxh3_64(vector[i], 1) << ")" << std::endl;
+    std::cout << "XCTAssertEqual(xxHash3.digest64(\"" << vector[i] << "\", seed:" << "0x" << std::hex << 2147483647 << "), " << "0x" << std::hex << xxh3_64(vector[i], 2147483647) << ")" << std::endl;
   }
 }
 
@@ -243,7 +246,8 @@ static void xxh3_128_oneshot()
 {
   for(int i = 0; i < sizeof(vector) / sizeof(vector[0]); i++)
   {
-    std::cout << "XCTAssertEqual(xxHash3.digest(\"" << vector[i] << "\"), " << "0x" << std::hex << xxh3_128(vector[i], 0).low64 << " 0x" << std::hex << xxh3_128(vector[i], 0).high64 << ")" << std::endl;
+    std::cout << "XCTAssertEqual(xxHash3.digest128(\"" << vector[i] << "\")[0], " << "0x" << std::hex << xxh3_128(vector[i], 0).low64 << ")" << std::endl;
+    std::cout << "XCTAssertEqual(xxHash3.digest128(\"" << vector[i] << "\")[1], " << "0x" << std::hex << xxh3_128(vector[i], 0).high64 << ")" << std::endl;
   }
 }
 
@@ -251,9 +255,12 @@ static void xxh3_128_oneshot_with_seed()
 {
   for(int i = 0; i < sizeof(vector) / sizeof(vector[0]); i++)
   {
-    std::cout << "XCTAssertEqual(xxHash3.digest(\"" << vector[i] << "\", seed:" << 0 << "), " << "0x" << std::hex << xxh3_128(vector[i], 0).low64 << " 0x" << std::hex << xxh3_128(vector[i], 0).high64 << ")" << std::endl;
-    std::cout << "XCTAssertEqual(xxHash3.digest(\"" << vector[i] << "\", seed:" << 1 << "), " << "0x" << std::hex << xxh3_128(vector[i], 1).low64 << " 0x" << std::hex << xxh3_128(vector[i], 1).high64 << ")" << std::endl;
-    std::cout << "XCTAssertEqual(xxHash3.digest(\"" << vector[i] << "\", seed:" << "0x" << std::hex << 2147483647 << "), " << "0x" << std::hex << xxh3_128(vector[i], 2147483647).low64 << " 0x" << std::hex << xxh3_128(vector[i], 2147483647).high64 << ")" << std::endl;
+    std::cout << "XCTAssertEqual(xxHash3.digest128(\"" << vector[i] << "\", seed:" << 0 << ")[0], " << "0x" << std::hex << xxh3_128(vector[i], 0).low64 << ")" << std::endl;
+    std::cout << "XCTAssertEqual(xxHash3.digest128(\"" << vector[i] << "\", seed:" << 0 << ")[1], " << "0x" << std::hex << xxh3_128(vector[i], 0).high64 << ")" << std::endl;
+    std::cout << "XCTAssertEqual(xxHash3.digest128(\"" << vector[i] << "\", seed:" << 1 << ")[0], " << "0x" << std::hex << xxh3_128(vector[i], 1).low64 << ")" << std::endl;
+    std::cout << "XCTAssertEqual(xxHash3.digest128(\"" << vector[i] << "\", seed:" << 1 << ")[1], " << "0x" << std::hex << xxh3_128(vector[i], 1).high64 << ")" << std::endl;
+    std::cout << "XCTAssertEqual(xxHash3.digest128(\"" << vector[i] << "\", seed:" << "0x" << std::hex << 2147483647 << ")[0], " << "0x" << std::hex << xxh3_128(vector[i], 2147483647).low64 << ")" << std::endl;
+    std::cout << "XCTAssertEqual(xxHash3.digest128(\"" << vector[i] << "\", seed:" << "0x" << std::hex << 2147483647 << ")[1], " << "0x" << std::hex << xxh3_128(vector[i], 2147483647).high64 << ")" << std::endl;
   }
 }
 
@@ -263,7 +270,7 @@ static void xxh32_update()
 	XXH32_state_t *state = XXH32_createState();
 	XXH32_reset(state, 0);
 	
-	for(int i = 0; i < sizeof(vector) / sizeof(vector[0]); i++)
+	for(int i = 0; i < sizeof(vector_2) / sizeof(vector_2[0]); i++)
 	{
 		XXH32_update(state, vector_2[i], strlen(vector_2[i]));
 		std::cout << vector[i] << " " << "0x" << std::hex << XXH32_digest(state) << std::endl;
@@ -282,7 +289,7 @@ static void xxh64_update()
 	XXH64_state_t *state = XXH64_createState();
 	XXH64_reset(state, 0);
 	
-	for(int i = 0; i < sizeof(vector) / sizeof(vector[0]); i++)
+	for(int i = 0; i < sizeof(vector_2) / sizeof(vector_2[0]); i++)
 	{
 		XXH64_update(state, vector_2[i], strlen(vector_2[i]));
 		std::cout << vector[i] << " " << "0x" << std::hex << XXH64_digest(state) << std::endl;
